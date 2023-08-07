@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=REM:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3.0.5/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app" class="app">
+        <nav>
+            <a href="#" @click="showall">全部</a>
+            <a href="#" v-for="i in areabutton" @click="showarea">{{i}}</a>
+        </nav>
+            <ul class="bicycle-list">
+                <template  v-for="i in material">
+                    <li v-show="show === `all` || show === i.sarea">
+                        <p>地區:{{i.sarea}}</p>
+                        <h3>站名:{{i.sna}}</h3>
+                        <p>目前可租借數量:{{i.sbi}}</p>
+                        <p>總數量:{{i.tot}}</p>
+                        <p>地址:{{i.ar}}</p>
+                        <p><small>更新時間:{{i.updateTime}}</small></p>
+                        <a :href="areamaps(i.lat,i.lng)" target = _blank :class="{repair: i.act===`0`}">
+                            <span v-if="i.act===`1`">地圖查詢</span>
+                            <span v-else>目前無車輛租借</span>
+                        </a>
+                    </li>
+                </template>
+            </ul>  
+    </div>
+</body>
+<script src="index.js"></script>
+</html>
